@@ -1,6 +1,6 @@
-#include <test.h>
+#include<graph_impl/basic/v1/basic_graph_impl.h>
 
 
 int main(){
-    print();
+    return 0;
 }
