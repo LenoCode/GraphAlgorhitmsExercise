@@ -2,7 +2,7 @@
 // Created by leno on 20.12.23..
 //
 #include <core_header.h>
-#include <graph_impl/basic/v1/basic_graph_impl.h>
+
 
 
 /**
@@ -49,6 +49,52 @@ TEST(GraphImplV1,TestBasicGraphImplementation) {
     int expected[] = {3,2};
     ASSERT_EQ(2,foundCount);
     ASSERT_TRUE(areArraysEqual(expected,foundCount,nodesConnectedTo1,foundCount));
+}
+
+
+
+
+
+TEST(GraphImplV1,GraphBasicCycleTest) {
+    TEST_DESCRIPTION("GraphBasicCycleTest","Testing basic graph is cycle or not")
+
+    bool cyclicExpected[] = {
+        false,
+        true
+    };
+    Edge testData[2][6] = {
+        {
+            {1,2},
+            {1,4},
+            {2,6},
+            {2,3},
+            {2,5},
+            {3,7}
+        },
+     {
+            {1,2},
+            {1,4},
+            {2,6},
+            {2,3},
+            {2,5},
+            {3,5}
+        }
+    };
+
+
+    for(int i = 0; i < 2;++i) {
+        Edge* graph = testData[i];
+        GraphImpl graph_impl{7};
+
+        for(int j = 0; j < 6;++j) {
+            graph_impl.insert(graph[j]);
+        }
+
+        ASSERT_EQ(cyclicExpected[i],graph_impl.cycle());
+    }
+
+
+
 }
 
 

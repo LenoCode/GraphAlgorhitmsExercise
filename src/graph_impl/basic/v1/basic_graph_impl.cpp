@@ -54,6 +54,41 @@ bool GraphImpl::directed() const {
     return false;
 }
 
+
+/**
+ * \brief
+ *  check wheter a graph has cycle. It does not check how many, it just returns when it finds the first one
+ * using BFS algorithm (using queueing)
+ * \return
+ */
+bool GraphImpl::cycle() const {
+    bool visited[V_SIZE] = {false};
+    queue<int> queue;
+
+    queue.push(E_SIZE);
+
+    while(!queue.empty()) {
+        int vertice= queue.front();
+        queue.pop();
+        if(visited[vertice])
+            return true;
+        else {
+            visited[vertice] = true;
+
+            for(int i = 1; i < V_SIZE+1;++i) {
+                if(i != vertice) {
+                    if(edges[vertice][i]) {
+                        if(!visited[i])
+                            queue.push(i);
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+
 int GraphImpl::insert(Edge edge) {
     int v1 = edge.v;
     int v2 = edge.w;

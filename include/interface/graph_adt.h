@@ -1,4 +1,5 @@
 #include <vector>
+#include <queue>
 
 struct Edge{
     int v,w;
@@ -19,6 +20,8 @@ class Graph{
         virtual int E() const = 0;
 
         virtual bool directed() const = 0;
+
+        virtual bool cycle() const = 0;
 
         virtual int insert(Edge) = 0;
         virtual int remove(Edge) = 0;

@@ -3,6 +3,8 @@
 //
 #include <interface/graph_adt.h>
 
+using namespace std;
+
 class GraphImpl : Graph {
 private:
     //Adj_matrix, this represents all the possible edges;
@@ -24,6 +26,8 @@ public:
 
     bool directed() const override;
 
+    bool cycle() const override;
+
     int insert(Edge) override;
 
     int remove(Edge) override;
@@ -33,4 +37,5 @@ public:
     void verticesEdges(int v,int* array,int foundElements);
 
     int findEdgesCount(int v);
+
 };
