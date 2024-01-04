@@ -1,23 +1,34 @@
 //
-// Created by leno on 20.12.23..
+// Created by leno on 02.01.24..
 //
+
+#ifndef BASIC_GRAPH_ADJ_LIST_REPO_H
+#define BASIC_GRAPH_ADJ_LIST_REPO_H
+
 #include <interface/graph_adt.h>
 
 using namespace std;
 
-
-class GraphImpl : Graph {
+class GraphImplAdjList : Graph {
 private:
     //Adj_matrix, this represents all the possible edges;
-    bool** edges;
+
+    struct node {
+        int data;
+        node* link = nullptr;
+    };
+
+    typedef node* link;
+    node** edges;
+
     const int V_SIZE;
     int E_SIZE;
 
     int findVerticeIndex(int v);
 
 public:
-    GraphImpl(int v);
-    ~GraphImpl();
+    GraphImplAdjList(int v);
+    ~GraphImplAdjList();
 
     int V() const override;
 
@@ -40,3 +51,5 @@ public:
     int findEdgesCount(int v);
 
 };
+
+#endif //BASIC_GRAPH_ADJ_LIST_REPO_H

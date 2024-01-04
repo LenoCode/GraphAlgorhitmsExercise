@@ -1,6 +1,7 @@
 //
 // Created by leno on 20.12.23..
 //
+#include <iostream>
 #include <graph_impl/basic/v1/basic_graph_impl.h>
 
 
@@ -12,7 +13,7 @@ GraphImpl::GraphImpl(int v):V_SIZE(v), E_SIZE(0) {
     edges = new bool *[v+1];
 
     for (int i = 0; i < v+1; ++i) {
-        edges[i] = new bool[v];
+        edges[i] = new bool[v]{false};
     }
 }
 
@@ -62,30 +63,63 @@ bool GraphImpl::directed() const {
  * \return
  */
 bool GraphImpl::cycle() const {
-    bool visited[V_SIZE] = {false};
+    bool visited[V_SIZE+1] = {false};
     queue<int> queue;
 
-    queue.push(E_SIZE);
+    queue.push(V_SIZE);
 
     while(!queue.empty()) {
         int vertice= queue.front();
+
         queue.pop();
-        if(visited[vertice])
+        if(visited[vertice]) {
             return true;
+        }
         else {
             visited[vertice] = true;
-
             for(int i = 1; i < V_SIZE+1;++i) {
                 if(i != vertice) {
                     if(edges[vertice][i]) {
-                        if(!visited[i])
+                        if(!visited[i]) {
                             queue.push(i);
+                        }
                     }
                 }
             }
         }
     }
+
     return false;
+}
+
+bool GraphImpl::DFS_print() const {
+    bool visited[V_SIZE+1] = {false};
+    stack<int> nodes;
+
+
+    nodes.push(1);
+
+    while(!nodes.empty()) {
+        int node = nodes.top();
+        nodes.pop();
+        if(visited[node])continue;
+        visited[node] = true;
+        std::cout<<node<<"  -> ";
+
+
+        for(int i = 1; i < V_SIZE+1;++i) {
+            if(i != node) {
+                if(edges[node][i]) {
+                    if(!visited[i]) {
+                        nodes.push(i);
+                    }
+                }
+            }
+        }
+
+
+    }
+
 }
 
 

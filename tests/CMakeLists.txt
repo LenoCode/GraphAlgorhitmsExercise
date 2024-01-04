@@ -21,10 +21,17 @@ enable_testing()
 
 
 
-add_executable(basic_graph_impl_test unit_tests/graph_impl/basic/v1/basic_graph_impl_test.cpp include/core_header.h)
+add_executable(basic_graph_impl_test unit_tests/graph_impl/basic/v1/basic_graph_impl_test.cpp include/core_header.h
+                                    ../include/graph_impl/basic/v1/basic_graph_adj_list_repo.h)
 
+
+add_executable(basic_graph_linked_list_test  unit_tests/graph_impl/basic/v1/basic_graph_impl_linked_list_test.cpp
+        include/core_header.h
+        ../include/graph_impl/basic/v1/basic_graph_adj_list_repo.h)
 
 target_include_directories(basic_graph_impl_test PUBLIC include)
+
+target_include_directories(basic_graph_linked_list_test PUBLIC include)
 
 target_link_libraries(
         basic_graph_impl_test
@@ -32,6 +39,13 @@ target_link_libraries(
         graph
 )
 
+target_link_libraries(
+        basic_graph_linked_list_test
+        GTest::gtest_main
+        graph
+)
+
 include(GoogleTest)
 
 gtest_discover_tests(basic_graph_impl_test)
+gtest_discover_tests(basic_graph_linked_list_test)

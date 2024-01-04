@@ -5,7 +5,6 @@
 #ifndef CORE_HEADER_H
 #define CORE_HEADER_H
 #include <gtest/gtest.h>
-#include <graph_impl/basic/v1/basic_graph_impl.h>
 
 
 #define TEST_DESCRIPTION(desc,name)  std::cerr<<"\n" <<"        Test name    "<< name<<"\n" << "\n" <<"[   DESC   ]  = " << desc<< "\n" << std::endl;

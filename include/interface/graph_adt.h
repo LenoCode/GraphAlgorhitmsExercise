@@ -1,5 +1,8 @@
 #include <vector>
+#include <stack>
+#include <list>
 #include <queue>
+
 
 struct Edge{
     int v,w;
@@ -9,7 +12,6 @@ struct Edge{
 
 //he simplest interface that supports the basic graph-processing operations that we wish to consider
 class Graph{
-
     private:
         //Implementation-dependet code
 
@@ -22,6 +24,8 @@ class Graph{
         virtual bool directed() const = 0;
 
         virtual bool cycle() const = 0;
+
+        virtual bool DFS_print() const = 0;
 
         virtual int insert(Edge) = 0;
         virtual int remove(Edge) = 0;

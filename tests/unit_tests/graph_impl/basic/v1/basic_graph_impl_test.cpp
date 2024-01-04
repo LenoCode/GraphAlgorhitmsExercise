@@ -2,7 +2,7 @@
 // Created by leno on 20.12.23..
 //
 #include <core_header.h>
-
+#include <graph_impl/basic/v1/basic_graph_impl.h>
 
 
 /**
@@ -60,6 +60,7 @@ TEST(GraphImplV1,GraphBasicCycleTest) {
 
     bool cyclicExpected[] = {
         false,
+        true,
         true
     };
     Edge testData[2][6] = {
@@ -71,13 +72,13 @@ TEST(GraphImplV1,GraphBasicCycleTest) {
             {2,5},
             {3,7}
         },
-     {
+      {
             {1,2},
-            {1,4},
-            {2,6},
+            {1,5},
             {2,3},
-            {2,5},
-            {3,5}
+            {5,7},
+            {3,6},
+          {6,7}
         }
     };
 
@@ -92,8 +93,25 @@ TEST(GraphImplV1,GraphBasicCycleTest) {
 
         ASSERT_EQ(cyclicExpected[i],graph_impl.cycle());
     }
+}
+
+TEST(GraphImplV1,GraphBasicDFS_Print) {
+    TEST_DESCRIPTION("GraphBasicCycleTest","Testing DFS_print")
+    GraphImpl graph_impl{10};
+
+    //WHEN
+    graph_impl.insert(Edge{1,3});
+    graph_impl.insert(Edge{1,2});
+    graph_impl.insert(Edge{2,4});
+    graph_impl.insert(Edge{2,7});
+    graph_impl.insert(Edge{3,6});
+    graph_impl.insert(Edge{3,5});
+    graph_impl.insert(Edge{5,9});
+    graph_impl.insert(Edge{5,8});
+    graph_impl.insert(Edge{8,10});
 
 
+    graph_impl.DFS_print();
 
 }
 
